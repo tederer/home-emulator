@@ -1,0 +1,36 @@
+{
+   "name": "homeEmulator",
+   "version": "0.0.1",
+   "description": "Emulator for an IoT home automation exercise",
+   "private": true,
+   "author": {
+      "name": "Thomas Ederer",
+      "email": "2210781006@fh-burgenland.at"
+   },
+   "licenses": [
+      {
+         "type": "MIT"
+      }
+   ],
+   "dependencies": {
+      "mqtt": "4.3.7",
+      "express": "4.x",
+      "socket.io": "4.x"
+   },
+   "devDependencies": {
+      "grunt": "1.x",
+      "mocha": "10.x",
+      "expect.js": "0.x",
+      "grunt-contrib-clean": "2.x",
+      "grunt-contrib-concat": "2.x",
+      "grunt-contrib-jshint": "3.x",
+      "grunt-mocha-test": "0.x"
+   },
+   "engines": {
+      "node": ">=18.x"
+   },
+   "scripts": {
+      "start": "node ./src/Main.js",
+      "grunt": "./node_modules/.bin/grunt"
+   }
+}

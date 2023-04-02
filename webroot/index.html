@@ -1,0 +1,273 @@
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>home emulator</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+    <link rel="stylesheet" type="text/css" href="./css/style.css" />
+    <link  href="/libs/bootstrap.5.2.3.min.css" rel="stylesheet">
+    <script src="/libs/bootstrap.5.2.3.bundle.min.js"></script>
+    <script src="/libs/jquery-3.6.3.min.js"></script>
+    <script src="/libs/socket.io.4.5.4.min.js"></script>
+    <script src="javascripts/homeEmulator.js"></script>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-success p-2">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <a class="navbar-brand" href="#">home emulator</a>
+        
+       <div class="collapse navbar-collapse" id="navbarToggler">
+          <ul class="navbar-nav mr mt-2 mt-lg-0">
+             <li class="nav-item">
+                <a class="nav-link" id="accessControl">access control</a>
+             </li>
+             <li class="nav-item">
+                <a class="nav-link" id="basement">basement</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="kitchen">kitchen</a>
+            </li>
+          </ul>
+       </div>
+    </nav>
+    
+    <div id="accessControlTab" class="p-2">
+      <h5 class="text-center">access control</h5>
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-auto text-center">
+            <input id="pinCode" type="text" class="form-control" placeholder="entered PIN" size="10">
+          </div>  
+          <div class="col-auto text-center">
+            <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" width="2em" height="2em">
+              <circle id="statusLed" cx="50" cy="50" r="50" class="led-red"/>
+            </svg>                       
+          </div>  
+        </div>
+        
+        <div class="row justify-content-center">
+          <div class="col-auto text-center">
+            <button type="button" class="btn btn-success m-1" value="1">1</button>
+          </div>
+          <div class="col-auto text-center">
+            <button type="button" class="btn btn-success m-1" value="2">2</button>
+          </div>
+          <div class="col-auto text-center">
+            <button type="button" class="btn btn-success m-1" value="3">3</button>
+          </div>
+        </div>
+        <div class="row justify-content-center">
+          <div class="col-auto text-center">
+            <button type="button" class="btn btn-success m-1" value="4">4</button>
+          </div>
+          <div class="col-auto text-center">
+            <button type="button" class="btn btn-success m-1" value="5">5</button>
+          </div>
+          <div class="col-auto text-center">
+            <button type="button" class="btn btn-success m-1" value="6">6</button>
+          </div>
+        </div>
+        <div class="row justify-content-center">
+          <div class="col-auto text-center">
+            <button type="button" class="btn btn-success m-1" value="7">7</button>
+          </div>
+          <div class="col-auto text-center">
+            <button type="button" class="btn btn-success m-1" value="8">8</button>
+          </div>
+          <div class="col-auto text-center">
+            <button type="button" class="btn btn-success m-1" value="9">9</button>
+          </div>
+        </div>
+        <div class="row justify-content-center">
+          <div class="col-auto text-center">
+            <button type="button" class="btn btn-success" value="ok">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check-lg" viewBox="0 0 16 16">
+                <path d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425a.247.247 0 0 1 .02-.022Z"/>
+              </svg>
+            </button>
+          </div>
+          <div class="col-auto text-center">
+            <button type="button" class="btn btn-success" value="0">0</button>
+          </div>
+          <div class="col-auto text-center">
+            <button type="button" class="btn btn-success" value="cancel">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
+                <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+   
+    <div id="basementTab" class="p-2 d-none">
+      <h5 class="text-center">basement</h5>
+      <div class="container m-1" id="lightControl">
+        <div class="row justify-content-center">
+          <div class="col-auto text-center">
+            <p>lamp:</p>
+          </div>  
+          <div class="col-auto text-center">
+            <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" width="2em" height="2em">
+              <circle id="lamp" cx="50" cy="50" r="50" class="lamp-off"/>
+            </svg>                       
+          </div>  
+        </div>
+        <div class="row justify-content-center">
+          <div class="col-auto text-center">
+            <p>switch1:</p>
+          </div>  
+          <div class="col-auto text-center">
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="lightSwitch1" value="on">
+              <label class="form-check-label">on</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="lightSwitch1" value="off" checked>
+              <label class="form-check-label">off</label>
+            </div>                      
+          </div>  
+        </div>
+        <div class="row justify-content-center">
+          <div class="col-auto text-center">
+            <p>switch2:</p>
+          </div>  
+          <div class="col-auto text-center">
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="lightSwitch2" value="on">
+              <label class="form-check-label">on</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="lightSwitch2" value="off" checked>
+              <label class="form-check-label">off</label>
+            </div>                      
+          </div>  
+        </div>
+      </div>
+
+      <div class="container m-1" id="waterControl">
+        <div class="row justify-content-center">
+          <div class="col-auto text-center">
+            <p>pump:</p>
+          </div>  
+          <div class="col-auto text-center" id="pumpState">
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="pump" id="pump_on" value="on" disabled>
+              <label class="form-check-label" for="switch1_on">on</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="pump" id="pump_off" value="off" disabled checked>
+              <label class="form-check-label" for="switch1_off">off</label>
+            </div>                      
+          </div>  
+        </div>
+        <div class="row justify-content-center">
+          <div class="col-auto text-center">
+            <p>water sensor (low):</p>
+          </div>  
+          <div class="col-auto text-center">
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="sensorLow" value="on">
+              <label class="form-check-label">on</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="sensorLow" value="off" checked>
+              <label class="form-check-label">off</label>
+            </div>                      
+          </div>  
+        </div>
+        <div class="row justify-content-center">
+          <div class="col-auto text-center">
+            <p>water sensor (high):</p>
+          </div>  
+          <div class="col-auto text-center">
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="sensorHigh" value="on">
+              <label class="form-check-label">on</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="sensorHigh" value="off" checked>
+              <label class="form-check-label">off</label>
+            </div>                      
+          </div>  
+        </div>
+      </div>
+    </div>
+
+
+    <div id="kitchenTab" class="p-2 d-none">
+      <h5 class="text-center">kitchen (blindControl)</h5>
+      <div class="container m-1" id="kitchenBlindControl">
+        <div class="row justify-content-center">
+          <div class="col-auto text-center">
+            <p>↑ motor:</p>
+          </div>  
+          <div class="col-auto text-center" id="blindMotor1">
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="blindMotor1" value="on" disabled>
+              <label class="form-check-label">on</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="blindMotor1" value="off" disabled checked>
+              <label class="form-check-label">off</label>
+            </div>                      
+          </div>  
+        </div>
+        <div class="row justify-content-center">
+          <div class="col-auto text-center">
+            <p>↓ motor:</p>
+          </div>  
+          <div class="col-auto text-center" id="blindMotor2">
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="blindMotor2" value="on" disabled>
+              <label class="form-check-label">on</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="blindMotor2" value="off" disabled checked>
+              <label class="form-check-label">off</label>
+            </div>                      
+          </div>  
+        </div>
+        <div class="row justify-content-center">
+          <div class="col-auto text-center">
+            <p>↑ sensor:</p>
+          </div>  
+          <div class="col-auto text-center" id="upSensor">
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="upSensor" value="on">
+              <label class="form-check-label">on</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="upSensor" value="off" checked>
+              <label class="form-check-label">off</label>
+            </div>                      
+          </div>  
+        </div>
+        <div class="row justify-content-center">
+          <div class="col-auto text-center">
+            <p>↓ sensor:</p>
+          </div>  
+          <div class="col-auto text-center" id="downSensor">
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="downSensor" value="on">
+              <label class="form-check-label">on</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="downSensor" value="off" checked>
+              <label class="form-check-label">off</label>
+            </div>                      
+          </div>  
+        </div>
+        <div class="row justify-content-center" id="switches">
+          <div class="col-auto text-center">
+            <button type="button" class="btn btn-success m-1" value="up">up</button>
+          </div>
+          <div class="col-auto text-center">
+            <button type="button" class="btn btn-success m-1" value="down">down</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
