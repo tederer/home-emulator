@@ -8,8 +8,8 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: '18'
-      - run: npm audit
       - run: npm install
+      - run: npm audit
       - run: npm run grunt clean
       - run: npm run grunt lint
       - run: npm run grunt test
