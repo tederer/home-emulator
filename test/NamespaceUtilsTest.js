@@ -11,7 +11,7 @@ describe('NamespaceUtils', function() {
    
    it('assertNamespace(\'myNamespace\') creates a global object \'myNamespace\'', function() {
       assertNamespace('myNamespace');
-      expect(typeof myNamespace).to.not.be.eql('object');
+      expect(typeof myNamespace).to.not.be.eql("undefined");
    });
    
    it('assertNamespace(\'anotherNamespace\') creates a global object \'anotherNamespace\'', function() {
