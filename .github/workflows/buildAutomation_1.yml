@@ -9,7 +9,7 @@ jobs:
         with:
           node-version: '18'
       - run: npm install
-      - run: npm audit
+      - run: npm audit fix       # we recommend to use "npm audit" instead of "npm audit fix" because applying fixes automatically can break the build
       - run: npm run grunt clean
       - run: npm run grunt lint
       - run: npm run grunt test
