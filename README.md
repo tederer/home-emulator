@@ -1,3 +1,3 @@
 # home-emulator
 
-This project contains a home emulator.
+This project contains a beautiful home emulator.
